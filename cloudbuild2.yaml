@@ -1,0 +1,19 @@
+steps:
+  - id: 'branch name'
+    name: 'alpine'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - |
+      echo "***********************"
+      echo "DEVELOPMENT BRANCH TEST"
+      echo "***********************"
+  - id: 'adservice microservice'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - |
+      cd src/adservice
+      docker build -t gcr.io/team-3-a/microservices/$BRANCH_NAME:$SHORT_SHA .
+      docker push gcr.io/team-3-a/microservices/$BRANCH_NAME:$SHORT_SHA
